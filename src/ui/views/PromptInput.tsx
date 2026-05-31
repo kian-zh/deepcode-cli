@@ -63,7 +63,7 @@ export type PromptSubmission = {
   selectedSkills?: SkillInfo[];
   permissions?: UserToolPermission[];
   alwaysAllows?: PermissionScope[];
-  command?: "new" | "resume" | "continue" | "undo" | "mcp" | "exit";
+  command?: "new" | "resume" | "continue" | "undo" | "mcp" | "context" | "exit";
 };
 
 export type PromptDraft = {
@@ -662,6 +662,11 @@ export const PromptInput = React.memo(function PromptInput({
     }
     if (item.kind === "mcp") {
       onSubmit({ text: "/mcp", imageUrls: [], command: "mcp" });
+      resetPromptInput();
+      return;
+    }
+    if (item.kind === "context") {
+      onSubmit({ text: "/context", imageUrls: [], command: "context" });
       resetPromptInput();
       return;
     }
